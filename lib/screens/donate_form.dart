@@ -1,12 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:bloodx/widgets/app_bar.dart';
-
+import 'package:bloodx/models/userData.dart';
+import 'package:http/http.dart' as http ;
 class DonateScreen extends StatefulWidget {
   @override
   _DonateScreenState createState() => _DonateScreenState();
 }
 
 class _DonateScreenState extends State<DonateScreen> {
+  UserData userdata = new UserData();
+  String firstName;
+  String lastName;
+  String bloodGroup;
+  String gender;
+  String lastDonated;
+  String address;
+  int age;
+  String disease;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +43,9 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 10),
                       Container(
                         child: TextField(
+                          onChanged: (first) {
+                            firstName = first;
+                          },
                           autofocus: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
@@ -58,6 +73,9 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 10),
                       Container(
                         child: TextField(
+                          onChanged: (last) {
+                            lastName = last;
+                          },
                           autofocus: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
@@ -72,6 +90,7 @@ class _DonateScreenState extends State<DonateScreen> {
                         ),
                         width: 100.0,
                         height: 40,
+
                       )
                     ],
                   ),
@@ -89,6 +108,9 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 5),
                       Container(
                         child: TextField(
+                          onChanged: (bg) {
+                            bloodGroup = bg;
+                          },
                           autofocus: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
@@ -120,6 +142,9 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 35),
                       Container(
                         child: TextField(
+                          onChanged: (gende) {
+                            gender = gende;
+                          },
                           autofocus: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
@@ -151,6 +176,10 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 55),
                       Container(
                         child: TextField(
+
+                          onChanged: (agee) {
+                            age = int.parse(agee);
+                          },
                           keyboardType: TextInputType.number,
                           autofocus: true,
                           textAlign: TextAlign.center,
@@ -183,6 +212,9 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 27),
                       Container(
                         child: TextField(
+                          onChanged: (addr) {
+                            address = addr;
+                          },
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
@@ -216,6 +248,9 @@ class _DonateScreenState extends State<DonateScreen> {
                       SizedBox(width: 27),
                       Container(
                         child: TextField(
+                          onChanged: (donate) {
+                            lastDonated = donate;
+                          },
                           keyboardType: TextInputType.number,
                           autofocus: true,
                           textAlign: TextAlign.center,
@@ -247,6 +282,9 @@ class _DonateScreenState extends State<DonateScreen> {
                   ),
                   Container(
                     child: TextField(
+                      onChanged: (dd) {
+                        disease = dd;
+                      },
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.black),
@@ -260,8 +298,44 @@ class _DonateScreenState extends State<DonateScreen> {
                       ),
                     ),
                     width: 500,
-                    height: 500,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(100)),
+                            color: Color(0xffff3a5a)),
+                        child: FlatButton(
+                          child: Text(
+                            "Submit",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18),
+                          ),
+                          onPressed: () async {
+//                            Map<String, dynamic> maps = {
+//                              "firstname": firstName,
+//                              "lastname": lastName,
+//                              "bloodgroup": bloodGroup,
+//                              "age": age,
+//                              "gender": gender,
+//                              "address": address,
+//                              "last_blood_donated": lastDonated,
+//                              "health_problems": disease
+//                            };
+//                            String json = jsonEncode(maps);
+//                            http.Response response = await http.post('https://mothermary.free.beeceptor.com', body: maps
+//                            );
+//                            print(response.statusCode);
+//                            print(response.body);
+                            Navigator.pushNamed((context), '/donate_hospital');
+                          },
+                        ),
+                      )),
                 ],
               ),
             )
@@ -271,3 +345,7 @@ class _DonateScreenState extends State<DonateScreen> {
     );
   }
 }
+
+
+
+
